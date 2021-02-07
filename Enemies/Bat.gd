@@ -21,6 +21,7 @@ onready var sprite = $AnimatedSprite
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
 onready var hurtbox = $Hurtbox
+onready var softCollision = $SoftCollision
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -34,6 +35,7 @@ func _physics_process(delta):
 		CHASE:
 			chase_state(delta)
 	
+	handle_bat_overlap(delta)
 	velocity = move_and_slide(velocity)
 	
 func _on_Hurtbox_area_entered(area):
@@ -66,3 +68,7 @@ func chase_state(delta):
 	else:
 		state = IDLE
 	sprite.flip_h = velocity.x < 0
+
+func handle_bat_overlap(delta):
+	if softCollision.is_colliding():
+		velocity += softCollision.get_push_vector() * delta * 400
