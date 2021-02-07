@@ -4,6 +4,7 @@ export var ACCELERATION = 500
 export var MAX_SPEED = 100
 export var FRICTION = 500
 export var ROLL_SPEED = 120
+export var INVINCIBILITY_TIME = 0.5
 
 enum {
 	MOVE,
@@ -32,9 +33,9 @@ func _physics_process(delta):
 		MOVE:
 			move_state(delta)
 		ROLL:
-			roll_state(delta)
+			roll_state()
 		ATTACK:
-			attack_state(delta)
+			attack_state()
 	
 
 func move_state(delta):
@@ -64,11 +65,11 @@ func move_state(delta):
 	if Input.is_action_just_pressed("roll"):
 		state = ROLL
 		
-func attack_state(delta):
+func attack_state():
 	velocity = Vector2.ZERO
 	animationState.travel("Attack")
 	
-func roll_state(delta):
+func roll_state():
 	velocity = roll_vector * ROLL_SPEED
 	animationState.travel("Roll")
 	move()
@@ -84,7 +85,7 @@ func roll_animation_finished():
 	state = MOVE
 
 
-func _on_Hurtbox_area_entered(area):
+func _on_Hurtbox_area_entered(_area):
 	stats.health -= 1
-	hurtbox.start_invicibility(0.5)
+	hurtbox.start_invicibility(INVINCIBILITY_TIME)
 	hurtbox.create_hit_effect()

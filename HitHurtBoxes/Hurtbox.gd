@@ -7,14 +7,14 @@ var invincible = false setget set_invincible
 onready var timer = $Timer
 
 signal invincibility_started
-signal invincibility_end
+signal invincibility_ended
 
 func set_invincible(value):
 	invincible = value
 	if invincible == true:
 		emit_signal("invincibility_started")
 	else:
-		emit_signal("invicibility_ended")
+		emit_signal("invincibility_ended")
 
 func start_invicibility(duration):
 	self.invincible = true
@@ -31,7 +31,7 @@ func _on_Timer_timeout():
 	self.invincible = false
 
 func _on_Hurtbox_invincibility_started():
-	set_deferred("monitarable", false)
+	set_deferred("monitoring", false)
 
-func _on_Hurtbox_invincibility_end():
-	monitorable = true
+func _on_Hurtbox_invincibility_ended():
+	monitoring = true
