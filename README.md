@@ -1,6 +1,6 @@
 ## Setup
 
-1. Download and install the [Godot](https://godotengine.org/download) engine
+1. Download the [Godot](https://godotengine.org/download) engine
 1. Clone this repo in some directory
 1. Open Godot and create a new project in same directory from step 2.
 
