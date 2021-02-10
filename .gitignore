@@ -16,3 +16,6 @@ export_presets.cfg
 data_*/
 
 addons/
+
+bin/
+git_api*
